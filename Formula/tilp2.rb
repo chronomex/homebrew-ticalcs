@@ -1,8 +1,10 @@
 class Tilp2 < Formula
   desc "TI graphing calculator link/transfer program"
   homepage "http://lpg.ticalc.org/prj_tilp/"
-  url "https://downloads.sourceforge.net/projects/tilp/files/tilp2-linux/tilp2-1.18/tilp2-1.18.tar.bz2"
-  sha256 "7b3ab363eeb52504d6ef5811c5d264f8016060bb7bd427be5a064c2ed7384e47"
+  url "https://www.ticalc.org/pub/unix/tilp.tar.gz"
+  version "1.18"
+  head "https://github.com/debrouxl/tilp_and_gfm", :using => :git
+  sha256 "6ba834f7fdbbce9818ccaa864222aed2d1688b210e9ff2c59576d1fde5159cd7"
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "intltool" => :build
@@ -13,6 +15,7 @@ class Tilp2 < Formula
   depends_on "gfm" => :optional
 
   def install
+    Dir.chdir("tilp/trunk") if build.head?
     mkdir "m4"
     system "autoreconf", "-fi"
     system "./configure", "--disable-debug",
